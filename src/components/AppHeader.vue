@@ -2,11 +2,9 @@
   <header class="app-header">
     <div class="app-header__container container">
       <p class="app-header__title">
-        <span>&#60;</span>
-        luis-juzo
-        <span>/&#62;</span>
+        <span>&#60;</span>luis-juzo <span>/&#62;</span>
       </p>
-  
+
       <nav class="app-header__nav">
         <ul>
           <li>inicio</li>

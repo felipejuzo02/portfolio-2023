@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Marmelad&display=swap');
 @import './breakpoints';
 @import './spacings';
 @import './variables';
@@ -8,6 +9,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -15,4 +17,9 @@
 .container {
   max-width: $large-screen;
   margin: 0 auto;
+}
+
+.full-width {
+  width: 100%;
+  position: relative;
 }
