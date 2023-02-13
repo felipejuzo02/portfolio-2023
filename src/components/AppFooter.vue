@@ -43,7 +43,6 @@
   
   &__item {
     text-decoration: none;
-    
   }
 }
 </style>

@@ -4,14 +4,14 @@
   <main class="main">
     <div class="main__container container">
       <div class="main__informations">
-        <p class="main__greetings">hello,</p>
-        <h1 class="main__name">I'm <span>Luis</span> Juzo</h1>
-        <p class="main__description mb-md">Front end developer, with 3 years of experience, working mainly with VueJs and Quasar.</p>
-        <app-button @click="downloadCV()" label="Download CV"></app-button>
+        <p class="main__greetings">opaa,</p>
+        <h1 class="main__name">Sou o <span>Luis</span> Juzo</h1>
+        <p class="main__description mb-md">Desenvolvedor Frontend, com 3 anos de experiência, trabalhando principalmente com VueJS, Quasar e Capacitor.</p>
+        <app-button @click="downloadCV()" label="Baixar meu CV"></app-button>
       </div>
 
       <div class="main__container-image">
-          <img class="main__image" src="./assets/me.jpg" alt="Minha foto">
+        <img class="main__image" src="./assets/me.jpg" loading="lazy" alt="Minha foto">
       </div>
     </div>
   </main>
@@ -21,7 +21,7 @@
       <app-section-description :content="sectionDescriptionContent.about" />
 
       <div class="about__card-container full-width">
-        <app-about-card  v-for="(card, index) in aboutCardContent" :key="index" :content="card" />
+        <app-about-card v-for="(card, index) in aboutCardContent" :key="index" :content="card" />
       </div>
     </div>
   </section>
@@ -31,7 +31,7 @@
       <app-section-description :content="sectionDescriptionContent.skills" />
 
       <div class="about__card-container full-width">
-        <app-about-card  v-for="(card, index) in aboutCardContent" :key="index" :content="card" />
+        <app-technologies-list />
       </div>
     </div>
   </section>
@@ -39,6 +39,8 @@
   <section class="projects py-xl">
     <div class="container">
       <app-section-description :content="sectionDescriptionContent.projects" />
+
+      <app-project-list />
     </div>
   </section>
 
@@ -47,89 +49,98 @@
       <app-section-description :content="sectionDescriptionContent.contact" />
 
       <div class="contact__messages">
-        <div>
-          <p>Vamos nos conectar?</p>
-          <div>
-            card de conexao
+        <div class="contact__connect">
+          <p class="contact__connect-label mb-md">Vamos nos conectar?</p>
+          
+          <div class="contact__connect-card">
+            <app-conect-card />
           </div>
-        </div>
-
-        <div>
-          <p>Me mande uma mensagem</p>
-          <form action="submit">
-            <label for="teste">teste</label>
-            <input id="teste" type="text">
-          </form>
         </div>
       </div>
     </div>
   </section>
 
   <app-footer class="py-lg" />
+
+  <app-notify ref="notify" text="Seu contato foi enviado com sucesso!!" :model-value="true" />
 </template>
 
 <script setup>
 import AppHeader from './components/AppHeader.vue'
 import AppButton from './components/AppButton.vue'
+import AppNotify from './components/AppNotify.vue'
 import AppSectionDescription from './components/AppSectionDescription.vue'
 import AppAboutCard from './components/AppAboutCard.vue'
+import AppProjectList from './components/AppProjectList.vue'
+import AppConectCard from './components/AppConectCard.vue'
 import AppFooter from './components/AppFooter.vue'
+import AppTechnologiesList from './components/AppTechnologiesList.vue'
+import { ref } from "vue";
 
 const downloadCV = () => {
   const link = document.createElement('a')
 
-  link.setAttribute('href', './assets/me.png')
+  link.setAttribute('href', '../src/assets/cv.pdf')
   link.setAttribute('download', 'Luis Juzo - CV')
-  console.log('link', link)
+  link.setAttribute('id', 'cv')
 
+  link.style.visibility = 'hidden'
+  document.body.appendChild(link)
   link.click()
+  document.body.removeChild(link)
 }
 
 const sectionDescriptionContent = {
   about: {
-    section: 'about',
-    title: 'A little summary about me',
+    section: 'sobre',
+    title: 'Um pequeno resumo sobre mim',
     subtitle: 'Atuando na área de desenvolvimento front-end desde 2021, sendo mais específico com a tecnologia VueJS e Quasar. Formado em Análise e Desenvolvimento de Sistemas pela Faculdade de Tecnologia de Ribeirão Preto (FATEC). Tenho facilidade em aprender, buscando sempre desafios.'
   },
   skills: {
-    section: 'skills',
-    title: 'All technologies que tenho expectientes',
-    subtitle: 'Atuando na área de desenvolvimento front-end desde 2021, sendo mais específico com a tecnologia VueJS e Quasar. Formado em Análise e Desenvolvimento de Sistemas pela Faculdade de Tecnologia de Ribeirão Preto (FATEC). Tenho facilidade em aprender, buscando sempre desafios.'
+    section: 'tecnologias',
+    title: 'Todas as tecnologias que tenho experiência',
+    subtitle: 'Abaixo, todas as tecnologias na qual tenho ou tive experiência, considerando tanto no ambiente acadêmico, quanto dentro do próprio dia a dia dentro do ambiente profissional.'
   },
   projects: {
-    section: 'projects',
-    title: 'All projects make for me',
-    subtitle: 'Atuando na área de desenvolvimento front-end desde 2021, sendo mais específico com a tecnologia VueJS e Quasar. Formado em Análise e Desenvolvimento de Sistemas pela Faculdade de Tecnologia de Ribeirão Preto (FATEC). Tenho facilidade em aprender, buscando sempre desafios.'
+    section: 'projetos',
+    title: 'Todos os projetos feitos por mim',
+    subtitle: 'Os projetos listados, são principalmente projetos realizados por mim, não seguindo cursos e eventos, para que eu possa aprimorar minhas habilidades nas tecnologias que atuo.'
   },
   contact: {
-    section: 'contact',
-    title: 'Contact me for a coffee',
-    subtitle: 'loren ipsunnn'
+    section: 'contato',
+    title: 'Bora tomar um café?',
+    subtitle: 'Caso tenha interesse em conversar, me chame no linkedin, vou estar sempre atento e prometo que respondo o mais breve possível, pois é claro, um bom café não se nega a ninguém!'
   }
 }
 
 const aboutCardContent = [
   {
     name: 'hybrid',
-    title: 'Hybrid development',
-    description: 'Using JavaScript, hybrid development experience through Capacitor/Cordova for Web, Android and IOS systems.'
+    title: 'Desenvolvimento híbrido',
+    description: 'Sempre com base em JavaScript no desenvolvimento web, tenho experiência no desenvolvimento de aplicações híbridas, utilizando principalmente Capacitor/Cordova.'
   },
   {
     name: 'uiux',
     title: 'UI / UX Design',
-    description: 'Ease and experience in creating interfaces for the best user experience.'
+    description: 'Como sou uma pessoa visual, sempre gostei e tenho facilidade no desenvolvimento de interfaces gráficas, prezando sempre os conceitos de UI/UX.'
   },
   {
     name: 'database',
     title: 'SQL - Oracle',
-    description: 'Oracle database certification, from modeling to manipulation.'
+    description: 'Sou certificado Oracle, com o processo ministrado pela FATEC. Capaz de modelagem, criação e manipulação de bancos de dados relacional.'
   },
   {
     name: 'mobile',
-    title: 'Pensar em algo',
-    description: 'Using JavaScript, hybrid development experience through Capacitor/Cordova for Web, Android and IOS systems.'
+    title: 'Gestão ágil de projetos',
+    description: 'Experiência e conhecimento na gestão ágil de projetos, já atuando como Agile Lead e com diversos frameworks e metodologias, como Scrum, Kanban e XP.'
   },
 ]
+
+const values = ref({
+  name: '',
+  phone: '',
+  topic: ''
+})
 </script>
 
 
@@ -220,9 +231,28 @@ const aboutCardContent = [
 .contact {
   background-color: $dark-1;
 
-  &__messages {
+  &__connect-label, &__send-message {
+    color: $white;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  &__connect-card {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__button {
+    position: absolute;
+    right: 4rem;
   }
 }
 </style>

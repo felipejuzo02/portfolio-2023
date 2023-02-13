@@ -7,11 +7,7 @@
 
       <nav class="app-header__nav">
         <ul>
-          <li>inicio</li>
-          <li>sobre</li>
-          <li>tecnologias</li>
-          <li>projetos</li>
-          <li>contato</li>
+          <li v-for="(item, index) in sectionsList" :key="index" @click="item.navigation()">{{ item.label }}</li>
         </ul>
   
         <div class="app-header__social-media">
@@ -22,6 +18,30 @@
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  name: 'AppHeader',
+
+  computed: {
+    sectionsList () {
+      return [
+        { label: 'inicio', navigation: () => this.goToSection() },
+        { label: 'sobre' },
+        { label: 'tecnologias' },
+        { label: 'projetos' },
+        { label: 'contato' },
+      ]
+    }
+  },
+
+  methods: {
+    goToSection () {
+      console.log('teste')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '../style/variables.scss';

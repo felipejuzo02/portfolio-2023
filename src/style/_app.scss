@@ -23,3 +23,13 @@
   width: 100%;
   position: relative;
 }
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.relative-pos {
+  position: relative;
+}
