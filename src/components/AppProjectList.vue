@@ -21,10 +21,11 @@ export default {
   computed: {
     repositoriesToShow () {
       return [
-        'web-arenas-flask',
+        'page-djstudio',
+        'blog-v2',
+        'habitue-project',
         'message-encryption',
-        'blog',
-        'page-djstudio'
+        'todo-list',
       ]
     }
   },

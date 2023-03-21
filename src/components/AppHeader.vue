@@ -7,14 +7,21 @@
 
       <nav class="app-header__nav">
         <ul>
-          <li v-for="(item, index) in sectionsList" :key="index" @click="item.navigation()">{{ item.label }}</li>
+          <li v-for="(item, index) in sectionsList" :key="index">
+            <a :href="`#${item.id}`">{{ item.label }}</a>
+          </li>
         </ul>
-  
+
         <div class="app-header__social-media">
           <img src="../assets/logo-linkedin.svg" alt="Logo Linkedin">
           <img src="../assets/logo-wpp.svg" alt="Logo WhatsApp">
         </div>
       </nav>
+
+
+      <div class="app-header__more-icon" @click="handlerDrawer">
+        <span class="material-icons md-18">{{ drawerIcon }}</span>
+      </div>
     </div>
   </header>
 </template>
@@ -23,28 +30,43 @@
 export default {
   name: 'AppHeader',
 
-  computed: {
-    sectionsList () {
-      return [
-        { label: 'inicio', navigation: () => this.goToSection() },
-        { label: 'sobre' },
-        { label: 'tecnologias' },
-        { label: 'projetos' },
-        { label: 'contato' },
-      ]
+  data () {
+    return {
+      drawerIcon: 'menu'
     }
   },
 
+  computed: {
+    sectionsList () {
+      return [
+        { label: 'inicio', id: 'home' },
+        { label: 'sobre', id: 'about' },
+        { label: 'tecnologias', id: 'skills' },
+        { label: 'projetos', id: 'projects' },
+        { label: 'contato', id: 'contact' },
+      ]
+    },
+  },
+
   methods: {
-    goToSection () {
-      console.log('teste')
+    toggleDrawerIcon () {
+      this.drawerIcon = this.drawerIcon === 'menu' ? 'close' : 'menu'
+    },
+
+    handlerDrawer () {
+      const nav = document.querySelector('.app-header__nav')
+      const currentWidth = nav.style.width;
+
+      nav.style.width = currentWidth === '100%' ? null : '100%'
+
+      this.toggleDrawerIcon()
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../style/variables.scss';
+@import '../style/_app.scss';
 
 .app-header {
   background-color: $dark-1;
@@ -74,13 +96,31 @@ export default {
     }
   }
 
+  &__more-icon {
+    display: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: all 0.2s;
+    z-index: 100;
+
+    &:hover {
+      background-color: $dark-2;
+    }
+  }
+
   &__nav {
     font-size: 1.6rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
-    
+
+    & a {
+      text-decoration: none;
+      color: $white;
+    }
+
     & ul li {
       display: inline-block;
       margin-left: 3rem;
@@ -117,7 +157,6 @@ export default {
 
       &:hover {
         cursor: pointer;
-        // background-color: red;
       }
     }
 
@@ -128,6 +167,53 @@ export default {
       width: 2px;
       background-color: $white;
       left: -1.6rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .app-header {
+    &__more-icon {
+      display: block;
+    }
+
+    &__nav {
+      width: 0;
+      height: 100%;
+      background-color: $dark-2;
+      z-index: 99;
+      position: fixed;
+      top: 0;
+      right: 0;
+      overflow-x: hidden;
+      transition: all 0.5s;
+
+      flex-direction: column;
+      justify-content: center;
+
+      & ul li {
+        display: block;
+        margin: 0 0 3rem 0;
+        text-align: center;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+
+    &__social-media {
+      margin-top: 2rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background-color: $white;
+        left: 0;
+        top: -2.6rem;
+      }
     }
   }
 }

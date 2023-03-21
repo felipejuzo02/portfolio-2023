@@ -1,7 +1,7 @@
 <template>
   <app-header class="header" />
 
-  <main class="main">
+  <main class="main" id="home">
     <div class="main__container container">
       <div class="main__informations">
         <p class="main__greetings">opaa,</p>
@@ -16,7 +16,7 @@
     </div>
   </main>
 
-  <section class="about py-xl">
+  <section class="about py-xl" id="about">
     <div class="container">
       <app-section-description :content="sectionDescriptionContent.about" />
 
@@ -26,7 +26,7 @@
     </div>
   </section>
 
-  <section class="skills py-xl">
+  <section class="skills py-xl" id="skills">
     <div class="container">
       <app-section-description :content="sectionDescriptionContent.skills" />
 
@@ -36,7 +36,7 @@
     </div>
   </section>
 
-  <section class="projects py-xl">
+  <section class="projects py-xl" id="projects">
     <div class="container">
       <app-section-description :content="sectionDescriptionContent.projects" />
 
@@ -44,7 +44,7 @@
     </div>
   </section>
 
-  <section class="contact py-xl">
+  <section class="contact py-xl" id="contact">
     <div class="container">
       <app-section-description :content="sectionDescriptionContent.contact" />
 
@@ -75,7 +75,6 @@ import AppProjectList from './components/AppProjectList.vue'
 import AppConectCard from './components/AppConectCard.vue'
 import AppFooter from './components/AppFooter.vue'
 import AppTechnologiesList from './components/AppTechnologiesList.vue'
-import { ref } from "vue";
 
 const downloadCV = () => {
   const link = document.createElement('a')
@@ -103,7 +102,7 @@ const sectionDescriptionContent = {
   },
   projects: {
     section: 'projetos',
-    title: 'Todos os projetos feitos por mim',
+    title: 'Alguns projetos que desenvolvi',
     subtitle: 'Os projetos listados, são principalmente projetos realizados por mim, não seguindo cursos e eventos, para que eu possa aprimorar minhas habilidades nas tecnologias que atuo.'
   },
   contact: {
@@ -135,17 +134,11 @@ const aboutCardContent = [
     description: 'Experiência e conhecimento na gestão ágil de projetos, já atuando como Agile Lead e com diversos frameworks e metodologias, como Scrum, Kanban e XP.'
   },
 ]
-
-const values = ref({
-  name: '',
-  phone: '',
-  topic: ''
-})
 </script>
 
 
 <style lang="scss">
-@import './style/variables.scss';
+@import './style/app.scss';
 
 .main {
   position: relative;
@@ -253,6 +246,14 @@ const values = ref({
   &__button {
     position: absolute;
     right: 4rem;
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .main {
+    &__image {
+      display: none;
+    }
   }
 }
 </style>
