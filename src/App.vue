@@ -153,7 +153,6 @@ const aboutCardContent = [
     height: calc(100vh - 6rem);
   }
 
-  
   &__informations {
     color: $white;
     width: 50%;
@@ -209,7 +208,9 @@ const aboutCardContent = [
 
   &__card-container {
     display: flex;
-    gap: 3%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
   }
 }
 
@@ -253,6 +254,18 @@ const aboutCardContent = [
   .main {
     &__image {
       display: none;
+    }
+
+    &__informations {
+      width: 100%;
+      text-align: center;
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

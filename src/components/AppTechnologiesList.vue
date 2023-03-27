@@ -20,8 +20,9 @@ export default {
         { image: 'css', name: 'CSS' },
         { image: 'sass', name: 'Sass / Scss' },
         { image: 'quasar', name: 'Quasar' },
+        { image: 'vite', name: 'Vite' },
         { image: 'node', name: 'Node JS' },
-        { image: 'vite', name: 'Vite' }
+        { image: 'postgresql', name: 'PostgreSQL' },
       ]
     }
   }

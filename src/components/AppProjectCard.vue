@@ -1,7 +1,7 @@
 <template>
   <div class="app-project-card pa-md">
     <div>
-      <img class="app-project-card__image mb-md" src="../assets/me.jpg" loading="lazy" alt="teste"></div>
+      <img class="app-project-card__image mb-md" src="../assets/me.jpg" loading="lazy" alt="Image projeto"></div>
       <div class="app-project-card__description px-md">
         <h3>{{ content.name }}</h3>
         <p>{{ content.description }}</p>
@@ -46,13 +46,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/variables.scss';
+@import '../style/app.scss';
 
 .app-project-card {
   color: $white;
   font-size: 1.4rem;
   width: 49%;
-  max-width: 50rem;
+  max-width: 70rem;
   position: relative;
   background-color: $dark-1;
   border-radius: 1rem;
@@ -108,6 +108,12 @@ export default {
       }
       
     }
+  }
+}
+
+@media only screen and (max-width: $medium-screen) {
+  .app-project-card {
+    width: 100%;
   }
 }
 </style>

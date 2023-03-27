@@ -21,13 +21,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/variables.scss';
+@import '../style/app.scss';
 
 .app-section-description {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: $white;
+  text-align: center;
 
   &__section {
     color: $primary;

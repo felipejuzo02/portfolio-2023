@@ -13,8 +13,13 @@
         </ul>
 
         <div class="app-header__social-media">
-          <img src="../assets/logo-linkedin.svg" alt="Logo Linkedin">
-          <img src="../assets/logo-wpp.svg" alt="Logo WhatsApp">
+          <a href="https://www.linkedin.com/in/luis-felipe-juzo/" target="_blank">
+            <img src="../assets/logo-linkedin.svg" alt="Logo Linkedin">
+          </a>
+
+          <a href="https://github.com/felipejuzo02" target="_blank">
+            <img src="../assets/logo-github.svg" alt="Logo Github">
+          </a>
         </div>
       </nav>
 
@@ -117,8 +122,7 @@ export default {
     gap: 3rem;
 
     & a {
-      text-decoration: none;
-      color: $white;
+      
     }
 
     & ul li {
@@ -126,23 +130,28 @@ export default {
       margin-left: 3rem;
       position: relative;
 
-      &::before {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 3px;
-        background-color: $primary;
-        bottom: -0.5rem;
-        transition: 0.5s;
-      }
+      & a {
+        text-decoration: none;
+        color: $white;
 
-      &:hover::before {
-        width: 100%;
-      }
-
-      &:hover {
-        color: $primary;
-        cursor: pointer;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 3px;
+          background-color: $primary;
+          bottom: -0.5rem;
+          transition: 0.5s;
+        }
+  
+        &:hover::before {
+          width: 100%;
+        }
+  
+        &:hover {
+          color: $primary;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -191,13 +200,13 @@ export default {
       flex-direction: column;
       justify-content: center;
 
-      & ul li {
+      & ul li{
         display: block;
         margin: 0 0 3rem 0;
         text-align: center;
 
-        &:last-child {
-          margin: 0;
+        & > a {
+          position: relative;
         }
       }
     }

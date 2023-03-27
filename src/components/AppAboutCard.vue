@@ -2,7 +2,7 @@
   <div class="app-about-card">
     <img class="app-about-card__image" :src="image" alt="Trocar aq">
 
-    <div class="app-about-card__content mt-lg">
+    <div class="app-about-card__content mt-lg px-md">
       <p class="app-about-card__title mb-sm">{{ content.title }}</p>
       <p class="app-about-card__description">{{ content.description }}</p>
     </div>
@@ -26,10 +26,10 @@ const props = defineProps ({
 
 const image = computed(() => {
   const images = {
-    database: database,
-    hybrid: hybrid,
-    mobile: mobile,
-    uiux: uiux,
+    database,
+    hybrid,
+    mobile,
+    uiux,
   }
 
   return images[props.content.name]
@@ -38,7 +38,7 @@ const image = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/variables.scss';
+@import '../style/app.scss';
 .app-about-card {
   color: white;
   background-color: $dark-1;
@@ -70,6 +70,18 @@ const image = computed(() => {
 
   &__description {
     font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .app-about-card {
+    width: 49%;
+  }
+}
+
+@media only screen and (max-width: $medium-screen) {
+  .app-about-card {
+    width: 100%;
   }
 }
 </style>
