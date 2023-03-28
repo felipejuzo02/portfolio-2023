@@ -37,6 +37,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   transition: all .5s;
+  position: relative;
 
   &__image {
     width: 70%;
