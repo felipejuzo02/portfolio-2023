@@ -4,22 +4,41 @@
 
     <nav class="app-footer__nav">
       <ul class="app-footer__list py-md">
-        <li class="app-footer__item">inicio</li>
-        <li class="app-footer__item">sobre</li>
-        <li class="app-footer__item">tecnologias</li>
-        <li class="app-footer__item">projetos</li>
-        <li class="app-footer__item">contato</li>
+        <li v-for="(item, index) in sectionsList" :key="index">
+          <a :href="`#${item.id}`">{{ item.label }}</a>
+        </li>
       </ul>
 
       <div>
-        <img class="mr-md" src="../assets/logo-linkedin.svg" alt="Logo linkedin">
-        <img src="../assets/logo-wpp.svg" alt="Logo WhatsApp">
+        <a href="https://www.linkedin.com/in/luis-felipe-juzo/" target="_blank">
+          <img src="../assets/logo-linkedin.svg" alt="Logo Linkedin">
+        </a>
+
+        <a class="pl-sm" href="https://github.com/felipejuzo02" target="_blank">
+          <img src="../assets/logo-github.svg" alt="Logo Github">
+        </a>
       </div>
     </nav>
 
     <p class="mt-lg">@ 2023 - Created by luis-juzo</p>
   </footer>
 </template>
+
+<script>
+export default {
+  computed: {
+    sectionsList () {
+      return [
+        { label: 'inicio', id: 'home' },
+        { label: 'sobre', id: 'about' },
+        { label: 'tecnologias', id: 'skills' },
+        { label: 'projetos', id: 'projects' },
+        { label: 'contato', id: 'contact' },
+      ]
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '../style/variables.scss';
@@ -39,10 +58,11 @@
     display: flex;
     justify-content: center;
     gap: 4rem;
-  }
-  
-  &__item {
-    text-decoration: none;
+
+    & li a {
+      text-decoration: none;
+      color: $white;
+    }
   }
 }
 </style>
