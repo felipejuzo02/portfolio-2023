@@ -49,13 +49,9 @@ export default {
     },
 
     getImageURL (name) {
-      const url = new URL(`../assets/projects/${name}.png`, import.meta.url)
-
-      if (url.pathname === '/undefined') {
-        return url.origin + '/src/assets/projects/construcao.png'
-      }
+      const imageName = name !== 'blog-v2' ? name : 'construcao' 
  
-      return url.href
+      return new URL(`../assets/projects/${imageName}.png`, import.meta.url)
     }
   }
 }
