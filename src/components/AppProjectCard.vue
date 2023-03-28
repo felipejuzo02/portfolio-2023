@@ -1,7 +1,7 @@
 <template>
   <div class="app-project-card pa-md">
     <div>
-      <img class="app-project-card__image mb-md" src="../assets/me.jpg" loading="lazy" alt="Image projeto"></div>
+      <img class="app-project-card__image mb-md" :src="getImageURL(content.name)" loading="lazy" alt="Image projeto"></div>
       <div class="app-project-card__description px-md">
         <h3>{{ content.name }}</h3>
         <p>{{ content.description }}</p>
@@ -12,7 +12,7 @@
           <img src="../assets/logo-github.svg" alt="Logo github">
           <p>Repositório</p>
         </div>
-        <div class="app-project-card__links flex" @click="openProjectView()">
+        <div v-if="content.homepage" class="app-project-card__links flex" @click="openProjectView()">
           <img src="../assets/www.svg" alt="Logo internet">
           <p>Visualizar</p>
         </div>
@@ -33,13 +33,29 @@ export default {
     }
   },
 
+  data() {
+    return {
+      image: ''
+    }
+  },
+
   methods: {
     openRepositorie () {
       window.open(this.content.html_url, '_blank')
     },
 
     openProjectView () {
-      window.open(this.content.html_url, '_blank') // TODO: TROCAR ISSO
+      window.open(this.content.homepage, '_blank')
+    },
+
+    getImageURL (name) {
+      const url = new URL(`../assets/projects/${name}.png`, import.meta.url)
+
+      if (url.pathname === '/undefined') {
+        return url.origin + '/src/assets/projects/construcao.png'
+      }
+ 
+      return url.href
     }
   }
 }
@@ -59,7 +75,9 @@ export default {
 
   &__image {
     width: 100%;
+    height: 28rem;
     border-radius: 1rem;
+    // aspect-ratio: 16/9;
   }
 
   &__nav {
