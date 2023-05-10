@@ -1,7 +1,7 @@
 <template>
-  <div class="app-technologies-card">
+  <div class="app-technologies-card" @click="redirectTechnologyDoc">
     <img class="app-technologies-card__image" :src="images" alt="Logo vue">
-    <span class="app-technologies-card__tooltip">{{ content.name }}</span>
+    <span class="app-technologies-card__tooltip py-xs">{{ content.name }}</span>
   </div>
 </template>
 
@@ -20,6 +20,12 @@ export default {
     images () {
       return new URL(`../assets/technologies/${this.content.image}.svg`, import.meta.url).href
     }
+  },
+
+  methods: {
+    redirectTechnologyDoc () {
+      console.log('Redirecionar para a documentação')
+    }
   }
 }
 </script>
@@ -29,15 +35,16 @@ export default {
 
 .app-technologies-card {
   background-color: $white;
-  width: 16rem;
+  width: 100%;
   height: 16rem;
-  border-radius: 6.4rem;
+  border-radius: .6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  transition: all .5s;
+  transition: all .3s;
   position: relative;
+  cursor: pointer;
 
   &__image {
     width: 70%;
@@ -53,13 +60,12 @@ export default {
   }
 
   &__tooltip {
-    position: absolute;
-    bottom: -2.6rem;
-    background-color: $dark-2;
+    background-color: rgba($color: $dark-1, $alpha: .4);
     color: $white;
     font-size: 1.2rem;
-    padding: .2rem 2rem;
-    border-radius: .8rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0rem;
     display: none;
   }
 }

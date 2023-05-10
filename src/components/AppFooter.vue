@@ -1,41 +1,21 @@
 <template>
   <footer class="app-footer">
-    <h3 class="app-footer__name">Luis Felipe Juzo</h3>
+    <h3 class="app-footer__name">Follow me</h3>
 
-    <nav class="app-footer__nav">
-      <ul class="app-footer__list py-md">
-        <li v-for="(item, index) in sectionsList" :key="index">
-          <a :href="`#${item.id}`">{{ item.label }}</a>
-        </li>
-      </ul>
+    <app-social-grid />
 
-      <div>
-        <a href="https://www.linkedin.com/in/luis-felipe-juzo/" target="_blank">
-          <img src="../assets/logo-linkedin.svg" alt="Logo Linkedin">
-        </a>
-
-        <a class="pl-sm" href="https://github.com/felipejuzo02" target="_blank">
-          <img src="../assets/logo-github.svg" alt="Logo Github">
-        </a>
-      </div>
-    </nav>
-
-    <p class="mt-lg">@ 2023 - Created by luis-juzo</p>
+    <p>@ 2023 - Created by Luis Felipe Juzo</p>
   </footer>
 </template>
 
 <script>
+import AppSocialGrid from './AppSocialGrid.vue';
+
 export default {
-  computed: {
-    sectionsList () {
-      return [
-        { label: 'inicio', id: 'home' },
-        { label: 'sobre', id: 'about' },
-        { label: 'tecnologias', id: 'skills' },
-        { label: 'projetos', id: 'projects' },
-        { label: 'contato', id: 'contact' },
-      ]
-    }
+  name: 'AppFooter',
+
+  components: {
+    AppSocialGrid
   }
 }
 </script>
@@ -44,25 +24,26 @@ export default {
 @import '../style/variables.scss';
 
 .app-footer {
-  background-color: $dark-2;
+  background-color: $dark-1;
   color: $white;
   text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  &__name {
-    font-size: 1.6rem;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    top: 0;
+    left: 0;
+    background-color: $grey-1;
   }
 
-  &__list {
-    text-decoration: none;
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-
-    & li a {
-      text-decoration: none;
-      color: $white;
-    }
+  &__name {
+    font-size: 2rem;
   }
 }
 </style>

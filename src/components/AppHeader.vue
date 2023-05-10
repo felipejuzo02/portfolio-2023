@@ -1,25 +1,23 @@
 <template>
   <header class="app-header">
     <div class="app-header__container container">
-      <p class="app-header__title">
+      <p class="app-header__title" @click="$router.push({ name: 'Home' })">
         <span>&#60;</span>luis-juzo <span>/&#62;</span>
       </p>
 
       <nav class="app-header__nav">
         <ul>
           <li v-for="(item, index) in sectionsList" :key="index">
-            <a :href="`#${item.id}`">{{ item.label }}</a>
+            <a @click="item.route">{{ item.label }}</a>
           </li>
         </ul>
 
-        <div class="app-header__social-media">
-          <a href="https://www.linkedin.com/in/luis-felipe-juzo/" target="_blank">
-            <img src="../assets/logo-linkedin.svg" alt="Logo Linkedin">
-          </a>
-
-          <a href="https://github.com/felipejuzo02" target="_blank">
-            <img src="../assets/logo-github.svg" alt="Logo Github">
-          </a>
+        <div class="app-header__actions">
+          <app-button @click="open" label="Hire me"></app-button>
+          
+          <button class="app-header__toggle-theme">
+            <img src="../assets/light-mode.svg" alt="Teste">
+          </button>
         </div>
       </nav>
 
@@ -32,8 +30,14 @@
 </template>
 
 <script>
+import AppButton from './AppButton.vue'
+
 export default {
   name: 'AppHeader',
+
+  components: {
+    AppButton
+  },
 
   data () {
     return {
@@ -44,11 +48,9 @@ export default {
   computed: {
     sectionsList () {
       return [
-        { label: 'inicio', id: 'home' },
-        { label: 'sobre', id: 'about' },
-        { label: 'tecnologias', id: 'skills' },
-        { label: 'projetos', id: 'projects' },
-        { label: 'contato', id: 'contact' },
+        { label: 'Projects', route: () => this.$router.push({ name: 'Projects' }) },
+        { label: 'About Me', route: () => this.$router.push({ name: 'AboutMe' }) },
+        { label: 'Contact', route: () => this.$router.push({ name: 'Contact' }) },
       ]
     },
   },
@@ -86,9 +88,9 @@ export default {
   box-shadow: -1px 3px 20px -7px rgba(0,0,0,0.75);
   
   &__container {
-    display: flex; 
+    display: flex;
     align-items: center;
-    height: 6rem;
+    height: 7rem;
     justify-content: space-between;
   }
 
@@ -156,7 +158,7 @@ export default {
     }
   }
 
-  &__social-media {
+  &__actions {
     display: flex;
     gap: 1rem;
     position: relative;
@@ -168,14 +170,21 @@ export default {
         cursor: pointer;
       }
     }
+  }
 
-    &::before {
-      content: "";
-      position: absolute;
-      height: 2rem;
-      width: 2px;
-      background-color: $white;
-      left: -1.6rem;
+  &__toggle-theme {
+    -webkit-box-shadow: -1px 3px 20px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 3px 20px -7px rgba(0,0,0,0.75);
+    box-shadow: -1px 3px 20px -7px rgba(0,0,0,0.75);
+
+    background-color: $dark-1;
+    padding: 0 1rem;
+    border-radius: .6rem;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $dark-2;
     }
   }
 }
@@ -211,7 +220,7 @@ export default {
       }
     }
 
-    &__social-media {
+    &__actions {
       margin-top: 2rem;
 
       &::before {

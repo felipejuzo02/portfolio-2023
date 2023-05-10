@@ -31,9 +31,8 @@ export default {
 
 <style lang="scss" scoped>
 .app-technologies-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.4rem;
-  justify-content: center;
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 </style>
