@@ -1,15 +1,17 @@
 <template>
-  <main class="main" id="home">
-    <div class="main__container container">
-      <div class="main__informations">
-        <p class="main__greetings">opaa,</p>
-        <h1 class="main__name">Sou o <span>Luis</span> Juzo</h1>
-        <p class="main__description mb-md">Desenvolvedor Frontend, com 3 anos de experiência, trabalhando principalmente com VueJS, Quasar e Capacitor.</p>
-        <app-button @click="downloadCV()" label="Baixar meu CV"></app-button>
+  <main class="page-home" id="home">
+    <div class="page-home__container container">
+      <div class="page-home__informations">
+        <p class="page-home__greetings">hey,</p>
+        <h1 class="page-home__name">I'm <span>Luis</span> Juzo</h1>
+        <p class="page-home__description mb-md">
+          Frontend developer, with 3 years of experience, working mainly with VueJS, Quasar and Capacitor.
+        </p>
+        <app-button @click="downloadCV()" label="Download CV"></app-button>
       </div>
 
-      <div class="main__container-image">
-        <img class="main__image" src="../assets/me.jpg" loading="lazy" alt="Minha foto">
+      <div class="page-home__container-image">
+        <img class="page-home__image" src="../assets/me.jpg" loading="lazy" alt="Minha foto">
       </div>
     </div>
   </main>
@@ -21,20 +23,12 @@
       <app-project-list />
     </div>
   </section>
-
-  <app-notify ref="notify" text="Seu contato foi enviado com sucesso!!" :model-value="true" />
 </template>
 
 <script setup>
-import AppHeader from '../components/AppHeader.vue'
 import AppButton from '../components/AppButton.vue'
-import AppNotify from '../components/AppNotify.vue'
 import AppSectionDescription from '../components/AppSectionDescription.vue'
-import AppAboutCard from '../components/AppAboutCard.vue'
 import AppProjectList from '../components/AppProjectList.vue'
-import AppConectCard from '../components/AppConectCard.vue'
-import AppFooter from '../components/AppFooter.vue'
-import AppTechnologiesList from '../components/AppTechnologiesList.vue'
 
 const downloadCV = () => {
   const link = document.createElement('a')
@@ -51,7 +45,7 @@ const downloadCV = () => {
 
 const sectionDescriptionContent = {
   about: {
-    section: 'sobre',
+    section: 'hii',
     title: 'Um pequeno resumo sobre mim',
     subtitle: 'Atuando na área de desenvolvimento front-end desde 2021, sendo mais específico com a tecnologia VueJS e Quasar. Formado em Análise e Desenvolvimento de Sistemas pela Faculdade de Tecnologia de Ribeirão Preto (FATEC). Tenho facilidade em aprender, buscando sempre desafios.'
   },
@@ -61,9 +55,9 @@ const sectionDescriptionContent = {
     subtitle: 'Abaixo, todas as tecnologias na qual tenho ou tive experiência, considerando tanto no ambiente acadêmico, quanto dentro do próprio dia a dia dentro do ambiente profissional.'
   },
   projects: {
-    section: 'projetos',
-    title: 'Alguns projetos que desenvolvi',
-    subtitle: 'Os projetos listados, são principalmente projetos realizados por mim, não seguindo cursos e eventos, para que eu possa aprimorar minhas habilidades nas tecnologias que atuo.'
+    section: 'projects',
+    title: 'Some projects I developed',
+    subtitle: 'The projects listed are mainly projects carried out by me, not following courses and events, so that I can improve my skills in the technologies I work with.'
   },
   contact: {
     section: 'contato',
@@ -71,36 +65,13 @@ const sectionDescriptionContent = {
     subtitle: 'Caso tenha interesse em conversar, me chame no linkedin, vou estar sempre atento e prometo que respondo o mais breve possível, pois é claro, um bom café não se nega a ninguém!'
   }
 }
-
-const aboutCardContent = [
-  {
-    name: 'hybrid',
-    title: 'Desenvolvimento híbrido',
-    description: 'Sempre com base em JavaScript no desenvolvimento web, tenho experiência no desenvolvimento de aplicações híbridas, utilizando principalmente Capacitor/Cordova.'
-  },
-  {
-    name: 'uiux',
-    title: 'UI / UX Design',
-    description: 'Como sou uma pessoa visual, sempre gostei e tenho facilidade no desenvolvimento de interfaces gráficas, prezando sempre os conceitos de UI/UX.'
-  },
-  {
-    name: 'database',
-    title: 'SQL - Oracle',
-    description: 'Sou certificado Oracle, com o processo ministrado pela FATEC. Capaz de modelagem, criação e manipulação de bancos de dados relacional.'
-  },
-  {
-    name: 'mobile',
-    title: 'Gestão ágil de projetos',
-    description: 'Experiência e conhecimento na gestão ágil de projetos, já atuando como Agile Lead e com diversos frameworks e metodologias, como Scrum, Kanban e XP.'
-  },
-]
 </script>
 
 
 <style lang="scss">
 @import '../style/app.scss';
 
-.main {
+.page-home {
   background-color: $dark-1;
 
   &__container {
@@ -160,52 +131,10 @@ const aboutCardContent = [
   }
 }
 
-.about {
-  background-color: $dark-2;
-
-  &__card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-}
-
-.skills {
-  background-color: $dark-1;
-}
-
 .projects {
   background-color: $dark-2;
 }
 
-.contact {
-  background-color: $dark-1;
-
-  &__connect-label, &__send-message {
-    color: $white;
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  &__connect-card {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  &__button {
-    position: absolute;
-    right: 4rem;
-  }
-}
 
 @media only screen and (max-width: $large-screen) {
   .main {

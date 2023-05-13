@@ -1,8 +1,19 @@
 <template>
   <div class="app-input">
-    <label :for="name" class="app-input__label mb-sm">{{ label }}</label>
-    <input v-model="model" type="text" class="app-input__input full-width" :id="name" :placeholder="label"/>
-    <span>{{ errorMessage }}</span>
+    <label :for="name">
+      <span class="app-input__label">{{ label }}</span>
+      <input
+        v-model="model"
+        class="app-input__input"
+        :name="name"
+        type="text"
+        @focus="handleFocus"
+        @focusout="handleFocusOut"
+      >
+    </label>
+    <!-- <textarea 
+      class="app-input__input"
+      name="" id="" label="Teste" rows="10">teste</textarea> -->
   </div>
 </template>
 
@@ -10,11 +21,9 @@
 export default {
   name: 'AppInput',
 
-  emits: ['update:model-value'],
-
   props: {
     modelValue: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
 
@@ -29,61 +38,69 @@ export default {
     }
   },
 
+  emits: ['update:modelValue'],
+
   computed: {
     model: {
       get () {
         return this.modelValue
       },
 
-      set (modelValue) {
-        return this.$emit('update:model-value', modelValue)
+      set (value) {
+        return this.$emit('update:modelValue', value)
       }
-    },
+    }
   },
 
   methods: {
-    isRequired(value) {
-      if (value && value.trim()) {
-        return true;
-      }
+    handleFocus ({ target }) {
+      const label = target.previousElementSibling
 
-      return 'This is required';
+      label.classList.add('app-input__label--active')
+    },
+
+    handleFocusOut ({ target }) {
+      if (this.modelValue) return
+
+      const label = target.previousElementSibling
+
+      label.classList.remove('app-input__label--active')
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '../style/_app.scss';
+
 .app-input {
+  width: 100%;
+
   &__label {
-    font-size: 1.2rem;
-    margin-left: 2rem;
-    margin-top: 0.7rem;
-    display: block;
-    transition: all 0.3s;
-    transform: translateY(0rem);
-    color: white;
-    font-size: 1.4rem;
+    position: absolute;
+    color: #b4b4b4;
+
+    margin: 18px;
+    cursor: text;
+    transition: all .3s ease;
+
+    &--active {
+      font-size: 1rem;
+      margin: 10px;
+    }
   }
 
   &__input {
-    color: #333;
-    font-size: 1.2rem;
-    margin: 0 auto;
-    padding: 1.5rem 2rem;
-    border-radius: 0.2rem;
-    background-color: rgb(255, 255, 255);
-    border: none;
-    width: 90%;
-    display: block;
-    border-bottom: 0.3rem solid transparent;
-    transition: all 0.3s;
+    width: 100%;
+    padding: 25px 10px 10px;
+    background-color: $dark-1;
+    border: 2px solid $dark-2;
+    color: $white;
+    outline: none;
 
-    &:placeholder-shown + .app-label {
-      opacity: 0;
-      visibility: hidden;
-      -webkit-transform: translateY(-4rem);
-      transform: translateY(-4rem);
+    &:focus {
+      background-color: #2e2e2e;
+      border-bottom: 2px solid #b4b4b4;
     }
   }
 }

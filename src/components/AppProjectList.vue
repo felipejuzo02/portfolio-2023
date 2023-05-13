@@ -1,27 +1,37 @@
 <template>
   <div class="app-project-list">
-    <app-project-card v-for="(item, index) in repositories" :key="index" :content="item" />
+    <div class="app-project-list__grid">
+      <app-project-card
+        v-for="(item, index) in repositories"
+        :key="index"
+        :content="item"
+      />
+    </div>
+
+    <app-button class="app-project-list__button mt-lg" label="Load more" />
   </div>
 </template>
 
 <script>
 import AppProjectCard from './AppProjectCard.vue';
+import AppButton from './AppButton.vue';
 
 export default {
   components: {
-    AppProjectCard
+    AppProjectCard,
+    AppButton
   },
 
   data () {
     return {
-      repositories: []
+      repositories: [],
+      quantityRepositoriesShow: 2
     }
   },
 
   computed: {
     repositoriesToShow () {
       return [
-        'page-djstudio',
         'blog-v2',
         'habitue-project',
         'message-encryption',
@@ -54,8 +64,15 @@ export default {
 <style lang="scss" scoped>
 .app-project-list {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 </style>

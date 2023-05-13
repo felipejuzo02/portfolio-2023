@@ -26,16 +26,12 @@ export default {
           url: 'https://www.linkedin.com/in/luis-felipe-juzo/'
         },
         {
-          image: 'logo-linkedin',
+          image: 'logo-insta',
           url: 'https://www.linkedin.com/in/luis-felipe-juzo/'
         },
         {
-          image: 'logo-linkedin',
-          url: 'https://www.linkedin.com/in/luis-felipe-juzo/'
-        },
-        {
-          image: 'logo-linkedin',
-          url: 'https://www.linkedin.com/in/luis-felipe-juzo/'
+          image: 'logo-github',
+          url: 'https://github.com/felipejuzo02'
         }
       ]
     }
